@@ -46,16 +46,23 @@
                   </section>
 
                   <!--Create a Status label and drop down list-->
-                  <section class="form-group row">
-                    <label for="formGroupExampleInput4" class="font-weight-bold col-md-2 col-sm-3">Status:</label>
-                    <input type="text" class="form-control col-md-10 col-sm-9" id="formGroupExampleInput4" placeholder="Status">
-                  </section>
+              
+                  <section class="form-group">
+                    <label for="list" class="font-weight-bold">Status:</label>
+                    <br>
+                    <select name="status" id ="list">
+                      <option value="todo">To Do</option>
+                      <option value="in-progress">In-Progress</option>
+                      <option value="review">Review</option>
+                      <option value="done">Done</option>
+                    </select>
 
                   <!--Create an Email label and input field for the email-->
                   <section class="form-group row">
                     <label for="exampleInputEmail1" class="font-weight-bold col-md-2 col-sm-3">Email address:</label>
                     <input type="email" class="form-control font col-md-10 col-sm-9" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
                     <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+
                   </section>
 
                   <!--Submit button-->
