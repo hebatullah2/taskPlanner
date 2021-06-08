@@ -24,19 +24,19 @@
                 <!--Create a Name label and input field-->
                 <section class="form-group row">
                     <label for="formGroupExampleInput" class="font-weight-bold col-md-2 col-sm-3">Name:</label>
-                    <input type="text" class="form-control col-md-10 col-sm-9" id="formGroupExampleInput" placeholder="Name">
+                    <input type="text" class="form-control col-md-10 col-sm-9" id="formGroupExampleInput" placeholder="Name" maxlength="30">
                 </section>
 
                 <!--Create a Description label and input field-->
                 <section class="form-group row">
                     <label for="exampleFormControlTextarea1" class="font-weight-bold col-md-2 col-sm-3">Description:</label>
-                    <textarea class="form-control col-md-10 col-sm-9" id="exampleFormControlTextarea1" placeholder="Description" rows="3" maxlength="300" required></textarea>
+                    <textarea class="form-control col-md-10 col-sm-9" id="exampleFormControlTextarea1" placeholder="Description" rows="3" maxlength="150" required></textarea>
                 </section>
 
                 <!--Create an Assigned to label and input field-->
                 <section class="form-group row">
                     <label for="formGroupExampleInput2" class="font-weight-bold col-md-2 col-sm-3">Assigned to:</label>
-                    <input type="text" class="form-control col-md-10 col-sm-9" id="formGroupExampleInput2" placeholder="Assigned to">
+                    <input type="text" class="form-control col-md-10 col-sm-9" id="formGroupExampleInput2" placeholder="Assigned to" maxlength="30">
                 </section>
 
                 <!--Create a Due Date label and choose the date and time-->
@@ -59,7 +59,7 @@
                   <!--Create an Email label and input field for the email-->
                   <section class="form-group row">
                     <label for="exampleInputEmail1" class="font-weight-bold col-md-2 col-sm-3">Email address:</label>
-                    <input type="email" class="form-control font col-md-10 col-sm-9" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                    <input type="email" class="form-control font col-md-10 col-sm-9" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" maxlength="30">
                     <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
 
                   </section>
@@ -68,6 +68,221 @@
                   <button type="submit" class="btn btn-primary float-right">Save</button>
 
               </form>
+
+              <br><br><br>
+
+              <!--Create the cards-->
+              <section class="container">
+
+                  <!--Create first row-->
+                  <section class="row">
+
+                     <!--Create first card-->
+                      
+                            <section class="card text-center col-4">
+                                <div class="card-header">
+                                    <div class="float-left">
+                                        Name
+                                    </div>
+                                    <br>
+                                    <div class="float-left">
+                                        Assigned to goes here
+                                    </div>
+                                    <br>
+                                    <section class="float-left">
+                                        <label for="list">Status:</label>
+                                        <select name="status" id ="list">
+                                          <option value="todo">To Do</option>
+                                          <option value="in-progress">In-Progress</option>
+                                          <option value="review">Review</option>
+                                          <option value="done">Done</option>
+                                        </select>
+                                    </section>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">Description</h5>
+                                    <p class="card-text">Description characters limit= 150</p>
+                                    <a href="#" class="btn btn-danger">Delete</a>
+                                    <a href="#" class="btn btn-success">Done</a>
+                                    <a href="#" class="btn btn-warning">Update</a>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="float-left">
+                                        Due Date goes here
+                                    </div>
+                                    <br>
+                                    <div class="float-left">
+                                        Email goes here
+                                    </div>
+                                </div>
+                            </section>
+                        
+
+                        <!--Create second card-->
+                        <section class="card text-center col-4">
+                            <div class="card-header">
+                                <div class="float-left">
+                                    Name
+                                </div>
+                                <br>
+                                <div class="float-left">
+                                    Assigned to goes here
+                                </div>
+                                <br>
+                                <section class="float-left">
+                                    <label for="list">Status:</label>
+                                    <select name="status" id ="list">
+                                        <option value="todo">To Do</option>
+                                        <option value="in-progress">In-Progress</option>
+                                        <option value="review">Review</option>
+                                        <option value="done">Done</option>
+                                    </select>
+                                </section>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Description</h5>
+                                <p class="card-text">Description characters limit= 150</p>
+                                <a href="#" class="btn btn-danger">Delete</a>
+                                <a href="#" class="btn btn-success">Done</a>
+                                <a href="#" class="btn btn-warning">Update</a>
+                            </div>
+                            <div class="card-footer">
+                                <div class="float-left">
+                                    Due Date goes here
+                                </div>
+                                <br>
+                                <div class="float-left">
+                                    Email goes here
+                                </div>
+                            </div>
+                        </section>
+
+                        <!--Create third card-->
+                        <section class="card text-center col-4">
+                            <div class="card-header">
+                                <div class="float-left">
+                                    Name
+                                </div>
+                                <br>
+                                <div class="float-left">
+                                    Assigned to goes here
+                                </div>
+                                <br>
+                                <section class="float-left">
+                                    <label for="list">Status:</label>
+                                    <select name="status" id ="list">
+                                        <option value="todo">To Do</option>
+                                        <option value="in-progress">In-Progress</option>
+                                        <option value="review">Review</option>
+                                        <option value="done">Done</option>
+                                    </select>
+                                </section>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Description</h5>
+                                <p class="card-text">Description characters limit= 150</p>
+                                <a href="#" class="btn btn-danger">Delete</a>
+                                <a href="#" class="btn btn-success">Done</a>
+                                <a href="#" class="btn btn-warning">Update</a>
+                            </div>
+                            <div class="card-footer">
+                                <div class="float-left">
+                                    Due Date goes here
+                                </div>
+                                <br>
+                                <div class="float-left">
+                                    Email goes here
+                                </div>
+                            </div>
+                        </section>
+                        
+                    </section>
+                    <!--Create second row-->
+                    <section class="row">
+
+                        <!--Create fourth card-->
+                        <section class="card text-center col-4">
+                            <div class="card-header">
+                                <div class="float-left">
+                                    Name
+                                </div>
+                                <br>
+                                <div class="float-left">
+                                    Assigned to goes here
+                                </div>
+                                <br>
+                                <section class="float-left">
+                                    <label for="list">Status:</label>
+                                    <select name="status" id ="list">
+                                        <option value="todo">To Do</option>
+                                        <option value="in-progress">In-Progress</option>
+                                        <option value="review">Review</option>
+                                        <option value="done">Done</option>
+                                    </select>
+                                </section>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Description</h5>
+                                <p class="card-text">Description characters limit= 150</p>
+                                <a href="#" class="btn btn-danger">Delete</a>
+                                <a href="#" class="btn btn-success">Done</a>
+                                <a href="#" class="btn btn-warning">Update</a>
+                            </div>
+                            <div class="card-footer">
+                                <div class="float-left">
+                                    Due Date goes here
+                                </div>
+                                <br>
+                                <div class="float-left">
+                                    Email goes here
+                                </div>
+                            </div>
+                        </section>
+                           
+   
+                           <!--Create fifth card-->
+                           <section class="card text-center col-4">
+                            <div class="card-header">
+                                <div class="float-left">
+                                    Name
+                                </div>
+                                <br>
+                                <div class="float-left">
+                                    Assigned to goes here
+                                </div>
+                                <br>
+                                <section class="float-left">
+                                    <label for="list">Status:</label>
+                                    <select name="status" id ="list">
+                                        <option value="todo">To Do</option>
+                                        <option value="in-progress">In-Progress</option>
+                                        <option value="review">Review</option>
+                                        <option value="done">Done</option>
+                                    </select>
+                                </section>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Description</h5>
+                                <p class="card-text">Description characters limit= 150</p>
+                                <a href="#" class="btn btn-danger">Delete</a>
+                                <a href="#" class="btn btn-success">Done</a>
+                                <a href="#" class="btn btn-warning">Update</a>
+                            </div>
+                            <div class="card-footer">
+                                <div class="float-left">
+                                    Due Date goes here
+                                </div>
+                                <br>
+                                <div class="float-left">
+                                    Email goes here
+                                </div>
+                            </div>
+                        </section>
+              
+                    </section>
+
+                </section>
+       
         </main>
 
         <footer>
