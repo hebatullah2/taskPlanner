@@ -1,0 +1,9 @@
+row {
+    display:inline-block;
+    box-sizing: border-box;
+}
+
+card {
+    box-sizing: border-box;
+    margin: 1px;
+}
