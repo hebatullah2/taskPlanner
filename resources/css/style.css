@@ -1,9 +1,15 @@
-row {
+/* .row {
     display:inline-block;
     box-sizing: border-box;
+} */
+
+.card {
+    box-sizing: border-box;
+    margin: 10px;
 }
 
-card {
-    box-sizing: border-box;
-    margin: 1px;
+ul {
+    list-style-type: none;
 }
+
+
