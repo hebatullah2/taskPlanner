@@ -1,10 +1,10 @@
 const taskManager = new TaskManager();
 const save = document.getElementById("save");
-const name = document.getElementById("name");
+const taskName = document.getElementById("name");
 const description = document.getElementById("description");
 const assignedTo = document.getElementById("assignedTo");
 const dueDate = document.getElementById("dueDate");
 const status = document.getElementById("status");
 const email = document.getElementById("email");
-save.onclick = taskManager.addTask(name, description, assignedTo, dueDate, status, email);
+save.onclick = taskManager.addTask(taskName.value, description.value, assignedTo.value, dueDate.value, status.value, email.value);
 taskManager.render();
