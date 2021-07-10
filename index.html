@@ -16,16 +16,22 @@
         </header>
         <main>
             <!--Create a form-->
-            <form class="container">
+            <form  class="container">
                 <!--Create a Name label and input field-->
                 <section class="form-group row">
                     <label for="formGroupExampleInput" class="font-weight-bold col-md-2 col-sm-3">Name:</label>
-                    <input type="text" class="form-control col-md-10 col-sm-9" id="name" placeholder="Name" maxlength="30">
+                    <input type="text" class="form-control col-md-10 col-sm-9" id="name" placeholder="Name" maxlength="30" required/>
                 </section>
                 <!--Create a Description label and input field-->
                 <section class="form-group row">
                     <label for="exampleFormControlTextarea1" class="font-weight-bold col-md-2 col-sm-3">Description:</label>
-                    <textarea class="form-control col-md-10 col-sm-9" id="description" placeholder="Description" rows="3" maxlength="150" required></textarea>
+                    <textarea class="form-control col-md-10 col-sm-9" id="description" placeholder="Description" rows="3" maxlength="150" minlength="1" required></textarea>
+                    <div id="descriptionAlert" class="alert alert-warning alert-dismissible fade" role="alert" aria-hidden="true">
+                        <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
                 </section>
                 <!--Create an Assigned to label and input field-->
                 <section class="form-group row">
@@ -51,7 +57,7 @@
                     <input type="email" class="form-control font col-md-10 col-sm-9" id="email" aria-describedby="emailHelp" placeholder="Enter email" maxlength="30">
                 </section>
                   <!--Submit button-->
-                <button type="submit" id="save" class="btn btn-primary float-right">Save</button>
+                <input type="submit" id="save" class="btn btn-primary float-right">
             </form>
             <br><br><br>
 
