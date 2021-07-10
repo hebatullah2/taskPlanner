@@ -34,7 +34,8 @@ const createTaskHtml = (name, description, assignedTo, dueDate, statusValue, ema
 
                         <div class="card-body">
                             <h5 class="card-title">Description</h5>
-                            <p id ="descriptionId" class="card-text">${description}</p>
+                            <textarea id ="descriptionCard" class="card-text">${description}</textarea>
+                            <br>
                             <!-- <button type="button" class="btn btn-danger">Delete</button> -->
                             <a href="#" class="btn btn-danger">Delete</a>
                         </div>
@@ -56,8 +57,28 @@ const createTaskHtml = (name, description, assignedTo, dueDate, statusValue, ema
 // const taskHtml = createTaskHtml('Person1','clean','Person2','07/08/2021','Todo', 'person@gmail.com');
 // console.log(taskHtml);
 
+const validFormFieldInput = (data) => {
+    console.log(document.getElementById("descriptionAlert").classList);
+   if (data.length < 1) {
+    //    alert("Please, put enter a description.");
+    let element = document.getElementById("descriptionAlert");
+    if (element.classList[4] === "hide") {
+    element.classList.remove("hide");
+    element.classList.add("show");
+    }
+    element.classList.remove("show");
+    element.classList.add("hide");
+    return false;
+    }else {
+        return true;
+    }
+}
+
+
 save.addEventListener('click', function(event) {
     event.preventDefault();
+    if (validFormFieldInput(description.value)) {
     taskManager.addTask(taskName.value, description.value, assignedTo.value, dueDate.value, status.value, email.value);
     taskManager.render();
+    }
 });

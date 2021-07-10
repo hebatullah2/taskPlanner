@@ -12,6 +12,8 @@ ul {
     list-style-type: none;
 }
 
-#descriptionId {
-    overflow: scroll;
-}
+#descriptionCard {
+    overflow-y: scroll;
+} 
+
+
