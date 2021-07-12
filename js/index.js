@@ -7,6 +7,8 @@ const dueDate = document.getElementById("dueDate");
 const status = document.getElementById("status");
 const statusValue = status.value;
 const email = document.getElementById("email");
+const closeDescriptionAlert = document.getElementById("closeDescriptionAlert");
+const descriptionAlert = document.getElementById("descriptionAlert");
 
 // Create a function to return the HTML for each individual task
 const createTaskHtml = (name, description, assignedTo, dueDate, statusValue, email) => {
@@ -35,6 +37,8 @@ const createTaskHtml = (name, description, assignedTo, dueDate, statusValue, ema
                         <div class="card-body">
                             <h5 class="card-title">Description</h5>
                             <p id ="descriptionCard" class="card-text">${description}</p>
+                            <!-- <textarea id ="descriptionCard" class="card-text">${description}</textarea> -->
+                            <br>
                             <!-- <button type="button" class="btn btn-danger">Delete</button> -->
                             <a href="#" class="btn btn-danger">Delete</a>
                         </div>
@@ -94,29 +98,29 @@ const resetFunction = () => {
 
 
 // //Example starter JavaScript for disabling form submissions if there are invalid fields
-(function () {
-    'use strict'
+// (function () {
+//     'use strict'
   
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.querySelectorAll('.needs-validation')
+//     // Fetch all the forms we want to apply custom Bootstrap validation styles to
+//     var forms = document.querySelectorAll('.needs-validation')
   
-    // Loop over them and prevent submission
-    Array.prototype.slice.call(forms)
-    .forEach(function (form) {
-      form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault();
-          event.stopPropagation();
-        } else {
-        event.preventDefault();
-        form.classList.add('was-validated');
-        taskManager.addTask(taskName.value, description.value, assignedTo.value, dueDate.value, status.value, email.value);
-        taskManager.render();
-        resetFunction();
-        }
-      }, false);
-    })
-})();
+//     // Loop over them and prevent submission
+//     Array.prototype.slice.call(forms)
+//     .forEach(function (form) {
+//       form.addEventListener('submit', function (event) {
+//         if (!form.checkValidity()) {
+//           event.preventDefault();
+//           event.stopPropagation();
+//         } else {
+//         event.preventDefault();
+//         form.classList.add('was-validated');
+//         taskManager.addTask(taskName.value, description.value, assignedTo.value, dueDate.value, status.value, email.value);
+//         taskManager.render();
+//         resetFunction();
+//         }
+//       }, false);
+//     })
+// })();
 
 
 // save.addEventListener('click', function(event) {
@@ -137,3 +141,35 @@ const resetFunction = () => {
 //     taskManager.addTask(taskName.value, description.value, assignedTo.value, dueDate.value, status.value, email.value);
 //     taskManager.render();
 // });
+const toggleShowAlert = () => {
+    
+}
+
+const validFormFieldInput = (data) => {
+   if (data.length < 1) {
+    descriptionAlert.classList.remove("hide");
+    descriptionAlert.classList.add("show");
+    setTimeout(()=>{
+        descriptionAlert.classList.remove("show");
+        descriptionAlert.classList.add("hide");
+    }, 3000)
+    
+    return false;
+    }else {
+        return true;
+    }
+}
+
+// You can comment this (lines 82-85 below) back in and then when you click the "X" on the alert it will go away, make sure to comment out the "setTimeout" function (lines 70 - 73 above) and uncomment the "button" associated with it as well (lines 31-33 in index.html) if you want to change the way the message is closed out. Currently it will show for 3 seconds. But you can make those changes so it stays until the user closes them if you want.
+// closeDescriptionAlert.addEventListener("click", function(){
+//     descriptionAlert.classList.remove("show");
+//     descriptionAlert.classList.add("hide");
+// })
+
+save.addEventListener('click', function(event) {
+    event.preventDefault();
+    if (validFormFieldInput(description.value)) {
+    taskManager.addTask(taskName.value, description.value, assignedTo.value, dueDate.value, status.value, email.value);
+    taskManager.render();
+    }
+});
