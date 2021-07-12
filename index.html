@@ -19,59 +19,123 @@
 
         <main>
             <!--Create a form-->
-            <form class="container">
+            <!-- <form class="container"> -->
 
                 <!--Create a Name label and input field-->
-                <section class="form-group row">
-                    <label for="formGroupExampleInput" class="font-weight-bold col-md-2 col-sm-3">Name:</label>
-                    <input type="text" class="form-control col-md-10 col-sm-9" id="name" placeholder="Name" maxlength="30">
-                </section>
+                <!-- <section class="form-group row">
+                    <label for="name" class="font-weight-bold col-md-2 col-sm-3">Name:</label>
+                    <input type="text" class="form-controlcol-md-10 col-sm-9" id="name" placeholder="Name" maxlength="30">
+                </section> -->
 
                 <!--Create a Description label and input field-->
-                <section class="form-group row">
-                    <label for="exampleFormControlTextarea1" class="font-weight-bold col-md-2 col-sm-3">Description:</label>
+                <!-- <section class="form-group row">
+                    <label for="description" class="font-weight-bold col-md-2 col-sm-3">Description:</label>
                     <textarea class="form-control col-md-10 col-sm-9" id="description" placeholder="Description" rows="3" maxlength="150" required></textarea>
-                </section>
+                </section> -->
+                <!-- <div id="descriptionAlert" class="alert alert-danger hide" role="alert">
+                    <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span id="alertClose" aria-hidden="true">&times;</span>
+                    </button>
+                  </div> -->
 
                 <!--Create an Assigned to label and input field-->
-                <section class="form-group row">
-                    <label for="formGroupExampleInput2" class="font-weight-bold col-md-2 col-sm-3">Assigned to:</label>
-                    <input type="text" class="form-control col-md-10 col-sm-9" id="assignedTo" placeholder="Assigned to" maxlength="30">
-                </section>
+                <!-- <section class="form-group row">
+                    <label for="assignedTo" class="font-weight-bold col-md-2 col-sm-3">Assigned to:</label>
+                    <input type="text" class="form-control col-md-10 col-sm-9" id="assignedTo" placeholder="Assigned to" maxlength="30" required/>
+                </section> -->
 
                 <!--Create a Due Date label and choose the date and time-->
-                <section class="form-group row">
-                    <label for="formGroupExampleInput3" class="font-weight-bold col-md-2 col-sm-3">Due Date:</label>
+                <!-- <section class="form-group row">
+                    <label for="dueDate" class="font-weight-bold col-md-2 col-sm-3">Due Date:</label>
                     <input type="date" class="form-control col-md-10 col-sm-9" id="dueDate">
-                </section>
+                </section> -->
 
                   <!--Create a Status label and drop down list-->
-                <section class="form-group row">
+                <!-- <section class="form-group row">
                     <label for="status" class="font-weight-bold col-md-2 col-sm-3">Status:</label>
                     <select name="status" id ="status" class="col-md-10 col-sm-9">
                       <option value="todo">To Do</option>
                       <option value="in-progress">In-Progress</option>
                     </select>
-                </section>
+                </section> -->
 
                   <!--Create an Email label and input field for the email-->
-                <section class="form-group row">
+                <!-- <section class="form-group row">
                     <label for="email" class="font-weight-bold col-md-2 col-sm-3">Email address:</label>
                     <input type="email" class="form-control font col-md-10 col-sm-9" id="email" aria-describedby="emailHelp" placeholder="Enter email" maxlength="30">
-                </section>
+                </section> -->
 
                   <!--Submit button-->
-                <button type="submit" id="save" class="btn btn-primary float-right">Save</button>
+                <!-- <button type="submit" id="save" class="btn btn-primary float-right">Save</button>
 
             </form>
 
-            <br><br><br>
+            <br><br><br> -->
+
+
+            <!--Create a form-->
+            <form class="container needs-validation" novalidate>
+
+                <!--Create a Name label and input field-->
+                <div class="form-group row">
+                  <label for="name" class="form-label font-weight-bold col-md-2 col-sm-3">Name:</label>
+                  <input type="text" class="form-control col-md-10 col-sm-9" id="name" placeholder="Name" maxlength="30">
+                </div>
+
+                <!--Create a Description label and input field-->
+                <div class="form-group row">
+                  <label for="description" class="form-label font-weight-bold col-md-2 col-sm-3">Description:</label>
+                  <textarea type="text" class="form-control col-md-10 col-sm-9" id="description" placeholder="Description" rows="3" maxlength="150" required></textarea>
+                  <div class="invalid-feedback text-center">
+                    Please enter a description.
+                  </div>
+                </div>
+
+                <!--Create an Assigned to label and input field-->
+                <div class="form-group row">
+                  <label for="assignedTo" class="form-label font-weight-bold col-md-2 col-sm-3">Assigned to:</label>
+                    <input type="text" class="form-control col-md-10 col-sm-9" id="assignedTo" placeholder="Assigned to" maxlength="30">
+                </div>
+
+                <!--Create a Due Date label and choose the date and time-->
+                <div class="form-group row">
+                  <label for="dueDate" class="form-label font-weight-bold col-md-2 col-sm-3">Due Date:</label>
+                  <input type="date" class="form-control col-md-10 col-sm-9" id="dueDate">
+                </div>
+
+                <!--Create a Status label and drop down list-->
+                <div class="form-group row">
+                  <label for="status" class="form-label font-weight-bold col-md-2 col-sm-3">Status:</label>
+                  <select class="form-select col-md-10 col-sm-9" id="status">
+                    <option value="todo">To Do</option>
+                    <option value="in-progress">In-Progress</option>
+                 </select>
+                </div>
+
+                <!--Create an Email label and input field for the email-->
+                <div class="form-group row">
+                  <label for="email" class="font-weight-bold col-md-2 col-sm-3">Email address:</label>
+                  <input type="email" class="form-control font col-md-10 col-sm-9" id="email" aria-describedby="emailHelp" placeholder="Enter email" maxlength="30">
+                  <div class="text-center invalid-feedback">
+                    Please enter a valid email.
+                  </div>
+                </div>
+                </div>
+
+                <!--Submit button-->
+                <button class="btn btn-primary float-right" type="submit" id="save">Save</button>
+                <!-- <button type="submit" id="save" class="btn btn-primary float-right">Save</button> -->
+        
+            </form>
+
+              <br><br><br>
 
             <!--Create the cards-->
             
             <ul id="taskList" class="d-flex flex-wrap justify-content-center">
                 
-                
+
             <ul>
                    
         </main>

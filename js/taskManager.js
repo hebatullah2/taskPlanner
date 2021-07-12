@@ -16,8 +16,15 @@ class TaskManager {
         let tasksHtmlList = [];
         for(let i = 0; i < this.tasks.length; i++) {
             const currentTask = this.tasks[i];
-            const date = new Date(currentTask.dueDate);
-            const formattedDate = (date.getMonth() + 1) + '/' + (date.getDate() + 1) + '/' + date.getFullYear();
+            let formattedDate;
+            if (dueDate.value != '') {
+                let date = new Date(currentTask.dueDate);
+                formattedDate = (date.getMonth() + 1) + '/' + (date.getDate() + 1) + '/' + date.getFullYear(); 
+             } else {
+                 formattedDate = 'No due date';
+             };
+            // const date = new Date(currentTask.dueDate);
+            // const formattedDate = (date.getMonth() + 1) + '/' + (date.getDate() + 1) + '/' + date.getFullYear();
             const taskHtml = createTaskHtml(currentTask.name, currentTask.description, currentTask.assignedTo, formattedDate, currentTask.status, currentTask.email);
             tasksHtmlList.push(taskHtml);
         };
