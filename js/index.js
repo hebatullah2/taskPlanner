@@ -70,7 +70,7 @@ const validFormFieldInput = (data) => {
     setTimeout(()=>{
         descriptionAlert.classList.remove("show");
         descriptionAlert.classList.add("hide");
-    }, 3000)
+    }, 5000)
     
     return false;
     }else {
