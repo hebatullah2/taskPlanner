@@ -33,3 +33,10 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: auto;
 }
 
+/* .alert {
+    position:absolute;
+}
+
+#descriptionRow {
+    position:relative;
+} */

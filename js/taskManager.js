@@ -1,3 +1,48 @@
+// Create a function to return the HTML for each individual task
+const createTaskHtml = (name, description, assignedTo, dueDate, statusValue, email) => {
+    const html = 
+               `<li>
+                    <section class="card text-center">
+                        <div class="card-header">
+                            <div class="float-left">
+                                Name: ${name}
+                            </div>
+                            <br>
+                            <div class="float-left">
+                                Assigned to: ${assignedTo}
+                            </div>
+                            <br>
+                            <div class="float-left">
+                                <label for="list">Status:</label>
+                                <select name="status" id ="list">
+                                    <option value="todo" placeholder="To Do" ${statusValue === 'todo'?"selected":""}>To Do</option>
+                                    <option value="in-progress" ${statusValue === 'in-progress'?"selected":""}>In-Progress</option>
+                                    <option value="done" id="done">Done</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Description</h5>
+                            <p id ="descriptionCard" class="card-text">${description}</p>
+                           <!-- <textarea id ="descriptionCard" class="card-text">${description}</textarea>-->
+                            <br>
+                            <!-- <button type="button" class="btn btn-danger">Delete</button> -->
+                            <a href="#" class="btn btn-danger">Delete</a>
+                        </div>
+                        <div class="card-footer">
+                            <div class="float-left">
+                                Due Date: ${dueDate}
+                            </div>
+                            <br>
+                            <div class="float-left">
+                                Email: ${email}
+                            </div>
+                         </div>
+                    </section>
+                </li>`
+    return html;
+};
+
 //create a class that will be responsible for managing the tasks in the application 
 class TaskManager {
     constructor(currentId = '0'){
@@ -32,7 +77,26 @@ class TaskManager {
         const taskList = document.querySelector("#taskList");
         taskList.innerHTML = tasksHtml;
     }
+
+    save() {
+        let tasksJson = JSON.stringify(this.tasks);
+        localStorage.setItem("tasks", tasksJson);
+        let currentId = String(this.currentId);
+        localStorage.setItem("currentId", currentId);
+    }
+
+    load() {
+        if (localStorage.getItem("tasks")) {
+            let tasksJson = localStorage.getItem("tasks");
+            this.tasks = JSON.parse(tasksJson);
+        };
+        if (localStorage.getItem("currentId")) {
+            let currentIdString = localStorage.getItem("currentId");
+            this.currentId = Number(currentIdString);
+        }           
+    }
 };
+
 
 // to test the code of the class
 // const task1 = new TaskManager();
