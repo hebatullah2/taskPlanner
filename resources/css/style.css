@@ -2,18 +2,36 @@
     display:inline-block;
     box-sizing: border-box;
 } */
-
 .card {
     box-sizing: border-box;
     margin: 10px;
 }
-
 ul {
     list-style-type: none;
 }
-
 #descriptionCard {
+    border: 1px solid #d0e1e1;
+    margin: 10px auto;
+    width: 200px;
+    height: 100px;
     overflow-y: scroll;
-} 
-
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+}
+/* .alert {
+    position:absolute;
+}
+#descriptionRow {
+    position:relative;
+} */
 
