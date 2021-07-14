@@ -10,55 +10,8 @@ const email = document.getElementById("email");
 const closeDescriptionAlert = document.getElementById("closeDescriptionAlert");
 const descriptionAlert = document.getElementById("descriptionAlert");
 const taskList = document.getElementById("taskList");
-
 taskManager.load();
 taskManager.render();
-
-
-// Create a function to return the HTML for each individual task
-// const createTaskHtml = (name, description, assignedTo, dueDate, statusValue, email) => {
-//     const html = 
-//                `<li>
-//                     <section class="card text-center">
-//                         <div class="card-header">
-//                             <div class="float-left">
-//                                 Name: ${name}
-//                             </div>
-//                             <br>
-//                             <div class="float-left">
-//                                 Assigned to: ${assignedTo}
-//                             </div>
-//                             <br>
-//                             <div class="float-left">
-//                                 <label for="list">Status:</label>
-//                                 <select name="status" id ="list">
-//                                     <option value="todo" placeholder="To Do" ${statusValue === 'todo'?"selected":""}>To Do</option>
-//                                     <option value="in-progress" ${statusValue === 'in-progress'?"selected":""}>In-Progress</option>
-//                                     <option value="done" id="done">Done</option>
-//                                 </select>
-//                             </div>
-//                         </div>
-//                         <div class="card-body">
-//                             <h5 class="card-title">Description</h5>
-//                             <p id ="descriptionCard" class="card-text">${description}</p>
-//                            <!-- <textarea id ="descriptionCard" class="card-text">${description}</textarea>-->
-//                             <br>
-//                             <!-- <button type="button" class="btn btn-danger">Delete</button> -->
-//                             <a href="#" class="btn btn-danger">Delete</a>
-//                         </div>
-//                         <div class="card-footer">
-//                             <div class="float-left">
-//                                 Due Date: ${dueDate}
-//                             </div>
-//                             <br>
-//                             <div class="float-left">
-//                                 Email: ${email}
-//                             </div>
-//                          </div>
-//                     </section>
-//                 </li>`
-//     return html;
-// };
 // to test createTaskHtml function
 // const taskHtml = createTaskHtml('Person1','clean','Person2','07/08/2021','Todo', 'person@gmail.com');
 // console.log(taskHtml);
@@ -70,7 +23,8 @@ const resetFunction = () => {
     status.value = 'todo';
     email.value = '';
 };
-
+// const toggleShowAlert = () => {
+// }
 const validFormFieldInput = (data) => {
    if (data.length < 1) {
     descriptionAlert.classList.remove("hide");
@@ -100,13 +54,14 @@ save.addEventListener('click', function(event) {
     taskManager.render();
     }
 });
-
 taskList.addEventListener('click', function(event) {
     // for (let i=0; i < taskManager.tasks.length; i++) {
     // console.log(taskManager.tasks[i].id);
     // }
-    const statusList = document.getElementById("list");
     let element = event.target;
+    let buttonClasses =element.classList;
+    let id = element.getAttribute("data-id");
+    const statusList = document.getElementById("list");
     let currentStatus = event.target.value;
     const done = document.getElementById("done");
     if(element.id === 'list') {
@@ -117,6 +72,11 @@ taskList.addEventListener('click', function(event) {
         } else if (currentStatus === 'in-progress') {
             list.style.backgroundColor =  '#ffff80';
         }
+    };
+    if (buttonClasses.value.includes("delete-button")){
+        taskManager.deleteTask(id);
+        taskManager.save();
+        taskManager.render();
     };
 });
 
