@@ -13,11 +13,7 @@ const taskList = document.getElementById("taskList");
 taskManager.load();
 taskManager.render();
 
-// to test createTaskHtml function
-// const taskHtml = createTaskHtml('Person1','clean','Person2','07/08/2021','Todo', 'person@gmail.com');
-// console.log(taskHtml);
-
-
+// Create a function t reset the values of the form's inputs
 const resetFunction = () => {
     taskName.value = '';
     description.value = ''; 
@@ -26,11 +22,6 @@ const resetFunction = () => {
     status.value = 'todo';
     email.value = '';
 };
-
-
-const toggleShowAlert = () => {
-}
-
 
 
 const validFormFieldInput = (data) => {
@@ -53,6 +44,9 @@ const validFormFieldInput = (data) => {
 //     descriptionAlert.classList.remove("show");
 //     descriptionAlert.classList.add("hide");
 // })
+
+// event listeners 
+
 save.addEventListener('click', function(event) {
     event.preventDefault();
     if (validFormFieldInput(description.value)) {
@@ -70,8 +64,10 @@ taskList.addEventListener('click', function(event) {
     // for (let i=0; i < taskManager.tasks.length; i++) {
     // console.log(taskManager.tasks[i].id);
     // }
-    const statusList = document.getElementById("list");
     let element = event.target;
+    let buttonClasses =element.classList;
+    let id = element.getAttribute("data-id");
+    const statusList = document.getElementById("list");
     let currentStatus = event.target.value;
     const done = document.getElementById("done");
     if(element.id === 'list') {
@@ -82,6 +78,10 @@ taskList.addEventListener('click', function(event) {
         } else if (currentStatus === 'in-progress') {
             list.style.backgroundColor =  '#ffff80';
         }
-    }
+    };
+    if (buttonClasses.value.includes("delete-button")){
+        taskManager.deleteTask(id);
+        taskManager.save();
+        taskManager.render();
+    };
 });
-

@@ -1,5 +1,5 @@
 // Create a function to return the HTML for each individual task
-const createTaskHtml = (name, description, assignedTo, dueDate, statusValue, email) => {
+const createTaskHtml = (id, name, description, assignedTo, dueDate, statusValue, email) => {
     const html = 
                `<li>
                     <section class="card text-center">
@@ -26,8 +26,7 @@ const createTaskHtml = (name, description, assignedTo, dueDate, statusValue, ema
                             <p id ="descriptionCard" class="card-text">${description}</p>
                            <!-- <textarea id ="descriptionCard" class="card-text">${description}</textarea>-->
                             <br>
-                            <!-- <button type="button" class="btn btn-danger">Delete</button> -->
-                            <a href="#" class="btn btn-danger">Delete</a>
+                            <button type="button" class="btn btn-danger delete-button" data-id=${id}>Delete</button>
                         </div>
                         <div class="card-footer">
                             <div class="float-left">
@@ -61,16 +60,17 @@ class TaskManager {
         let tasksHtmlList = [];
         for(let i = 0; i < this.tasks.length; i++) {
             const currentTask = this.tasks[i];
-            let formattedDate;
-            if (dueDate.value != '') {
-                let date = new Date(currentTask.dueDate);
-                formattedDate = (date.getMonth() + 1) + '/' + (date.getDate() + 1) + '/' + date.getFullYear(); 
-             } else {
-                 formattedDate = 'No due date';
-             };
-            // const date = new Date(currentTask.dueDate);
-            // const formattedDate = (date.getMonth() + 1) + '/' + (date.getDate() + 1) + '/' + date.getFullYear();
-            const taskHtml = createTaskHtml(currentTask.name, currentTask.description, currentTask.assignedTo, formattedDate, currentTask.status, currentTask.email);
+            // console.log(dueDate.value)
+            // let formattedDate;
+            // if (dueDate.value != '') {
+            //     let date = new Date(currentTask.dueDate);
+            //     formattedDate = (date.getMonth() + 1) + '/' + (date.getDate() + 1) + '/' + date.getFullYear(); 
+            //  } else {
+            //      formattedDate = 'No due date';
+            //  };
+            const date = new Date(currentTask.dueDate);
+            const formattedDate = (date.getMonth() + 1) + '/' + (date.getDate() + 1) + '/' + date.getFullYear();
+            const taskHtml = createTaskHtml(currentTask.id, currentTask.name, currentTask.description, currentTask.assignedTo, formattedDate, currentTask.status, currentTask.email);
             tasksHtmlList.push(taskHtml);
         };
         const tasksHtml = tasksHtmlList.join("\n");
@@ -78,13 +78,16 @@ class TaskManager {
         taskList.innerHTML = tasksHtml;
     }
 
+    // Create a function to save to local storage
     save() {
         let tasksJson = JSON.stringify(this.tasks);
         localStorage.setItem("tasks", tasksJson);
         let currentId = String(this.currentId);
+        console.log(currentId);
         localStorage.setItem("currentId", currentId);
     }
 
+    // Create a function to load local storage
     load() {
         if (localStorage.getItem("tasks")) {
             let tasksJson = localStorage.getItem("tasks");
@@ -94,6 +97,12 @@ class TaskManager {
             let currentIdString = localStorage.getItem("currentId");
             this.currentId = Number(currentIdString);
         }           
+    }
+
+    // The function delete a task
+    deleteTask(id) {
+        let tasksToKeep = this.tasks.filter(task => task.id != id);
+        this.tasks = tasksToKeep;
     }
 };
 
