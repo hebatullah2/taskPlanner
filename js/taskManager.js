@@ -14,10 +14,10 @@ const createTaskHtml = (id, name, description, assignedTo, dueDate, statusValue,
                             <br>
                             <div class="float-left">
                                 <label for="list">Status:</label>
-                                <select name="status" id ="list">
-                                    <option value="todo" placeholder="To Do" ${statusValue === 'todo'?"selected":""}>To Do</option>
-                                    <option value="in-progress" ${statusValue === 'in-progress'?"selected":""}>In-Progress</option>
-                                    <option value="done" id="done">Done</option>
+                                <select name="status" id ="list-${id}" ${statusValue === 'todo' ? "class='todo'" : ""} ${statusValue === 'in-progress'?"class='in-progress'":""} ${statusValue === 'done' ? "class='done'" : ""}>
+                                    <option data-id=${id} class="statusClass" value="todo" placeholder="To Do" ${statusValue === 'todo' ? "selected" : ""}>To Do</option>
+                                    <option data-id=${id} class="statusClass" value="in-progress" ${statusValue === 'in-progress' ? "selected" : ""}>In-Progress</option>
+                                    <option data-id=${id} class="statusClass" value="done">Done</option>
                                 </select>
                             </div>
                         </div>
@@ -69,16 +69,19 @@ class TaskManager {
             const formattedDate = (date.getMonth() + 1) + '/' + (date.getDate() + 1) + '/' + date.getFullYear();
             const taskHtml = createTaskHtml(currentTask.id, currentTask.name, currentTask.description, currentTask.assignedTo, formattedDate, currentTask.status, currentTask.email);
             tasksHtmlList.push(taskHtml);
+            // if (this.tasks.length < 1) {
+            //     globalThis.statusClass = document.getElementsByClassName("statusClass");
+            // }
         };
         const tasksHtml = tasksHtmlList.join("\n");
         const taskList = document.querySelector("#taskList");
         taskList.innerHTML = tasksHtml;
+        return true;
     }
     save() {
         let tasksJson = JSON.stringify(this.tasks);
         localStorage.setItem("tasks", tasksJson);
         let currentId = String(this.currentId);
-        console.log(currentId);
         localStorage.setItem("currentId", currentId);
     }
     load() {
@@ -96,11 +99,24 @@ class TaskManager {
         let tasksToKeep = this.tasks.filter(task => task.id != id);
         this.tasks = tasksToKeep;
     }
+
+    //This method changes color of status
+    updateStatus(id, value) {
+        console.log(id);
+        console.log(value);
+        const changeList = [];
+        for (let i = 0; i < this.tasks.length; i++) {
+            let currentTask = this.tasks[i];
+            if (id == currentTask.id) {
+                console.log('I made it!');
+                currentTask.status = value;
+                changeList.push(currentTask);
+            }else {
+                changeList.push(currentTask);
+            }
+        };
+        console.log(changeList);
+        this.tasks = changeList;
+    }
 };
-// to test the code of the class
-// const task1 = new TaskManager();
-// console.log(task1.tasks);
-// console.log(task1.currentId);
-// task1.addTask('Person1','clean','Person2','07/08/2021','Todo', 'person@gmail.com');
-// console.log(task1.tasks)
-// console.log(task1)
+

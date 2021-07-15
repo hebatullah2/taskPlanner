@@ -28,6 +28,20 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     top: 0;
     width: auto;
 }
+
+.todo {
+    background-color:  '#ffcce0';
+}
+
+.in-progress {
+    background-color: '#ffff80';
+}
+
+.done {
+    background-color:  '#00e600';
+}
+
+
 /* .alert {
     position:absolute;
 }

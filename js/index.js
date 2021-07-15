@@ -10,11 +10,13 @@ const email = document.getElementById("email");
 const closeDescriptionAlert = document.getElementById("closeDescriptionAlert");
 const descriptionAlert = document.getElementById("descriptionAlert");
 const taskList = document.getElementById("taskList");
+
 taskManager.load();
 taskManager.render();
 // to test createTaskHtml function
 // const taskHtml = createTaskHtml('Person1','clean','Person2','07/08/2021','Todo', 'person@gmail.com');
 // console.log(taskHtml);
+
 const resetFunction = () => {
     taskName.value = '';
     description.value = ''; 
@@ -43,6 +45,22 @@ const validFormFieldInput = (data) => {
 //     descriptionAlert.classList.remove("show");
 //     descriptionAlert.classList.add("hide");
 // })
+
+const createStatusClassListener = () => {
+    const statusClass = document.getElementsByClassName("statusClass");
+    statusClass.addEventListener('click', function(event) {
+        let element = event.target;
+        let dataId = element.getAttribute("data-id");
+        let currentStatus = event.target.value;
+        //console.log(listId.id);
+        //const done = document.getElementById("done");
+        taskManager.updateStatus(dataId, currentStatus);
+        taskManager.save();
+        taskManager.render();
+        console.log(element.value);
+    });
+};
+
 save.addEventListener('click', function(event) {
     event.preventDefault();
     if (validFormFieldInput(description.value)) {
@@ -52,32 +70,37 @@ save.addEventListener('click', function(event) {
     taskManager.save();
     taskManager.load();
     taskManager.render();
-    }
+    const taskValueRender = taskManager.render();
+    console.log(taskValueRender);
+    if (taskValueRender) {
+        createStatusClassListener();
+        };
+    };
 });
 taskList.addEventListener('click', function(event) {
+    //event.preventDefault();
     // for (let i=0; i < taskManager.tasks.length; i++) {
     // console.log(taskManager.tasks[i].id);
     // }
     let element = event.target;
-    let buttonClasses =element.classList;
-    let id = element.getAttribute("data-id");
-    const statusList = document.getElementById("list");
-    let currentStatus = event.target.value;
-    const done = document.getElementById("done");
-    if(element.id === 'list') {
-        if (currentStatus === 'done') {
-            list.style.backgroundColor =  '#00e600';
-        } else if (currentStatus === 'todo') {
-            list.style.backgroundColor =  '#ffcce0';
-        } else if (currentStatus === 'in-progress') {
-            list.style.backgroundColor =  '#ffff80';
-        }
-    };
+    // console.log(element.children);
+    let buttonClasses = element.classList;
+    let dataId = element.getAttribute("data-id");
+    // let currentStatus = event.target.value;
+    // let checkId = element.id;
+    // const listId = document.getElementById(checkId);
+    //console.log(listId.id);
+   //const done = document.getElementById("done");
+    // if (element.children.length === 3) {
+    //     taskManager.updateStatus(dataId, element.value);
+    //     taskManager.save();
+    //     taskManager.render();
+    //     console.log(element.value);
+    // };
     if (buttonClasses.value.includes("delete-button")){
-        taskManager.deleteTask(id);
+        taskManager.deleteTask(dataId);
         taskManager.save();
         taskManager.render();
     };
 });
-
 
