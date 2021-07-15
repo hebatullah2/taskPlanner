@@ -14,10 +14,10 @@ const createTaskHtml = (id, name, description, assignedTo, dueDate, statusValue,
                             <br>
                             <div class="float-left">
                                 <label for="list">Status:</label>
-                                <select name="status" id ="list-${id}" ${statusValue === 'todo' ? "class='todo'" : ""} ${statusValue === 'in-progress'?"class='in-progress'":""} ${statusValue === 'done' ? "class='done'" : ""}>
+                                <select name="status" onchange="changeStatus(this.value, event)" id ="list-${id}" ${statusValue === 'todo' ? "class='todo'" : ""} ${statusValue === 'in-progress'?"class='in-progress'":""} ${statusValue === 'done' ? "class='done'" : ""}>
                                     <option data-id=${id} class="statusClass" value="todo" placeholder="To Do" ${statusValue === 'todo' ? "selected" : ""}>To Do</option>
                                     <option data-id=${id} class="statusClass" value="in-progress" ${statusValue === 'in-progress' ? "selected" : ""}>In-Progress</option>
-                                    <option data-id=${id} class="statusClass" value="done">Done</option>
+                                    <option data-id=${id} class="statusClass" value="done" ${statusValue === 'done' ? "selected" : ""}>Done</option>
                                 </select>
                             </div>
                         </div>
@@ -33,7 +33,7 @@ const createTaskHtml = (id, name, description, assignedTo, dueDate, statusValue,
                                 Due Date: ${dueDate}
                             </div>
                             <br>
-                            <div class="float-left">
+                            <div id="emailBox" class="float-left">
                                 Email: ${email}
                             </div>
                          </div>
@@ -69,21 +69,20 @@ class TaskManager {
             const formattedDate = (date.getMonth() + 1) + '/' + (date.getDate() + 1) + '/' + date.getFullYear();
             const taskHtml = createTaskHtml(currentTask.id, currentTask.name, currentTask.description, currentTask.assignedTo, formattedDate, currentTask.status, currentTask.email);
             tasksHtmlList.push(taskHtml);
-            // if (this.tasks.length < 1) {
-            //     globalThis.statusClass = document.getElementsByClassName("statusClass");
-            // }
         };
         const tasksHtml = tasksHtmlList.join("\n");
         const taskList = document.querySelector("#taskList");
         taskList.innerHTML = tasksHtml;
         return true;
     }
+
     save() {
         let tasksJson = JSON.stringify(this.tasks);
         localStorage.setItem("tasks", tasksJson);
         let currentId = String(this.currentId);
         localStorage.setItem("currentId", currentId);
     }
+
     load() {
         if (localStorage.getItem("tasks")) {
             let tasksJson = localStorage.getItem("tasks");
@@ -94,6 +93,7 @@ class TaskManager {
             this.currentId = Number(currentIdString);
         }           
     }
+
     // The function delete a task
     deleteTask(id) {
         let tasksToKeep = this.tasks.filter(task => task.id != id);
@@ -101,21 +101,17 @@ class TaskManager {
     }
 
     //This method changes color of status
-    updateStatus(id, value) {
-        console.log(id);
-        console.log(value);
+    updateStatus(id, value) {;
         const changeList = [];
         for (let i = 0; i < this.tasks.length; i++) {
             let currentTask = this.tasks[i];
             if (id == currentTask.id) {
-                console.log('I made it!');
                 currentTask.status = value;
                 changeList.push(currentTask);
             }else {
                 changeList.push(currentTask);
             }
         };
-        console.log(changeList);
         this.tasks = changeList;
     }
 };

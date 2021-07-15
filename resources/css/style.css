@@ -1,21 +1,22 @@
-/* .row {
-    display:inline-block;
-    box-sizing: border-box;
-} */
+
 .card {
     box-sizing: border-box;
     margin: 10px;
+    width: 325px;
 }
+
 ul {
     list-style-type: none;
 }
+
 #descriptionCard {
     border: 1px solid #d0e1e1;
     margin: 10px auto;
-    width: 200px;
+    width: 280px;
     height: 100px;
     overflow-y: scroll;
 }
+
 input[type="date"]::-webkit-calendar-picker-indicator {
     background: transparent;
     bottom: 0;
@@ -30,22 +31,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .todo {
-    background-color:  '#ffcce0';
+    background-color:  #FF9BBD;
 }
 
 .in-progress {
-    background-color: '#ffff80';
+    background-color: #FFFF69;
 }
 
 .done {
-    background-color:  '#00e600';
+    background-color:  #B2FF69;
 }
-
-
-/* .alert {
-    position:absolute;
-}
-#descriptionRow {
-    position:relative;
-} */
-
