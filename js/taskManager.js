@@ -14,9 +14,9 @@ const createTaskHtml = (id, name, description, assignedTo, dueDate, statusValue,
                             <br>
                             <div class="float-left">
                                 <label for="list">Status:</label>
-                                <select name="status" id ="list">
-                                    <option value="todo" placeholder="To Do" ${statusValue === 'todo'?"selected":""}>To Do</option>
-                                    <option value="in-progress" ${statusValue === 'in-progress'?"selected":""}>In-Progress</option>
+                                <select name="status" id ="list-${id}">
+                                    <option value="todo" id="todo" ${statusValue === 'todo'?"selected":""}>To Do</option>
+                                    <option value="in-progress" id="in-progress" ${statusValue === 'in-progress'?"selected":""}>In-Progress</option>
                                     <option value="done" id="done">Done</option>
                                 </select>
                             </div>
@@ -104,6 +104,8 @@ class TaskManager {
         let tasksToKeep = this.tasks.filter(task => task.id != id);
         this.tasks = tasksToKeep;
     }
+
+    updateList
 };
 
 

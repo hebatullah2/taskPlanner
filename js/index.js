@@ -65,23 +65,44 @@ taskList.addEventListener('click', function(event) {
     // console.log(taskManager.tasks[i].id);
     // }
     let element = event.target;
+    console.log(element);
     let buttonClasses =element.classList;
-    let id = element.getAttribute("data-id");
+    let dataId = element.getAttribute("data-id");
     const statusList = document.getElementById("list");
     let currentStatus = event.target.value;
+    console.log(currentStatus);
     const done = document.getElementById("done");
-    if(element.id === 'list') {
+    const todo = document.getElementById("todo");
+    const inProgress = document.getElementById("in-progress");
+    const list = document.getElementById(element.id);
+    console.log(element.id);
+    if(element.id) {
         if (currentStatus === 'done') {
+            console.log(list.options.length);
+            $("list").val('done');
+            // list.options[list.options[2]] = true;
             list.style.backgroundColor =  '#00e600';
+            console.log(done);
+            taskManager.updateStatus(dataId, element.value);
+            taskManager.save();
+            // taskManager.load();
         } else if (currentStatus === 'todo') {
             list.style.backgroundColor =  '#ffcce0';
-        } else if (currentStatus === 'in-progress') {
-            list.style.backgroundColor =  '#ffff80';
-        }
+            taskManager.save();
+       } else if (currentStatus === 'in-progress') {
+             list.style.backgroundColor =  '#ffff80';
+            taskManager.save();
+         }
     };
     if (buttonClasses.value.includes("delete-button")){
-        taskManager.deleteTask(id);
+        taskManager.deleteTask(dataId);
         taskManager.save();
         taskManager.render();
     };
 });
+
+// if (element.children.length === 3) {
+    //     taskManager.updateStatus(dataId, element.value);
+    //     taskManager.save();
+    //     taskManager.render();
+    //     console.log(element.value);
