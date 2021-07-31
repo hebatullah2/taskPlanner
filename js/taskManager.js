@@ -57,16 +57,11 @@ class TaskManager {
         let tasksHtmlList = [];
         for(let i = 0; i < this.tasks.length; i++) {
             const currentTask = this.tasks[i];
-            // console.log(dueDate.value)
-            // let formattedDate;
-            // if (dueDate.value != '') {
-            //     let date = new Date(currentTask.dueDate);
-            //     formattedDate = (date.getMonth() + 1) + '/' + (date.getDate() + 1) + '/' + date.getFullYear(); 
-            //  } else {
-            //      formattedDate = 'No due date';
-            //  };
             const date = new Date(currentTask.dueDate);
-            const formattedDate = (date.getMonth() + 1) + '/' + (date.getDate() + 1) + '/' + date.getFullYear();
+            let formattedDate = (date.getMonth() + 1) + '/' + (date.getDate() + 1) + '/' + date.getFullYear();
+            if (formattedDate == 'NaN/NaN/NaN'){
+                formattedDate = "No due date";
+            };
             const taskHtml = createTaskHtml(currentTask.id, currentTask.name, currentTask.description, currentTask.assignedTo, formattedDate, currentTask.status, currentTask.email);
             tasksHtmlList.push(taskHtml);
         };
@@ -75,14 +70,12 @@ class TaskManager {
         taskList.innerHTML = tasksHtml;
         return true;
     }
-
     save() {
         let tasksJson = JSON.stringify(this.tasks);
         localStorage.setItem("tasks", tasksJson);
         let currentId = String(this.currentId);
         localStorage.setItem("currentId", currentId);
     }
-
     load() {
         if (localStorage.getItem("tasks")) {
             let tasksJson = localStorage.getItem("tasks");
@@ -93,13 +86,11 @@ class TaskManager {
             this.currentId = Number(currentIdString);
         }           
     }
-
     // The function delete a task
     deleteTask(id) {
         let tasksToKeep = this.tasks.filter(task => task.id != id);
         this.tasks = tasksToKeep;
     }
-
     //This method changes color of status
     updateStatus(id, value) {;
         const changeList = [];
@@ -113,6 +104,29 @@ class TaskManager {
             }
         };
         this.tasks = changeList;
+    }
+    // Create a function to save to local storage
+    save() {
+        let tasksJson = JSON.stringify(this.tasks);
+        localStorage.setItem("tasks", tasksJson);
+        let currentId = String(this.currentId);
+        localStorage.setItem("currentId", currentId);
+    }
+    // Create a function to load local storage
+    load() {
+        if (localStorage.getItem("tasks")) {
+            let tasksJson = localStorage.getItem("tasks");
+            this.tasks = JSON.parse(tasksJson);
+        };
+        if (localStorage.getItem("currentId")) {
+            let currentIdString = localStorage.getItem("currentId");
+            this.currentId = Number(currentIdString);
+        }           
+    }
+    // The function delete a task
+    deleteTask(id) {
+        let tasksToKeep = this.tasks.filter(task => task.id != id);
+        this.tasks = tasksToKeep;
     }
 };
 
