@@ -14,10 +14,10 @@ const createTaskHtml = (id, name, description, assignedTo, dueDate, statusValue,
                             <br>
                             <div class="float-left">
                                 <label for="list">Status:</label>
-                                <select name="status" id ="list-${id}">
-                                    <option value="todo" id="todo" ${statusValue === 'todo'?"selected":""}>To Do</option>
-                                    <option value="in-progress" id="in-progress" ${statusValue === 'in-progress'?"selected":""}>In-Progress</option>
-                                    <option value="done" id="done">Done</option>
+                                <select name="status" onchange="changeStatus(this.value, event)" id ="list-${id}" ${statusValue === 'todo' ? "class='todo'" : ""} ${statusValue === 'in-progress'?"class='in-progress'":""} ${statusValue === 'done' ? "class='done'" : ""}>
+                                    <option data-id=${id} class="statusClass" value="todo" placeholder="To Do" ${statusValue === 'todo' ? "selected" : ""}>To Do</option>
+                                    <option data-id=${id} class="statusClass" value="in-progress" ${statusValue === 'in-progress' ? "selected" : ""}>In-Progress</option>
+                                    <option data-id=${id} class="statusClass" value="done" ${statusValue === 'done' ? "selected" : ""}>Done</option>
                                 </select>
                             </div>
                         </div>
@@ -33,7 +33,7 @@ const createTaskHtml = (id, name, description, assignedTo, dueDate, statusValue,
                                 Due Date: ${dueDate}
                             </div>
                             <br>
-                            <div class="float-left">
+                            <div id="emailBox" class="float-left">
                                 Email: ${email}
                             </div>
                          </div>
@@ -60,34 +60,27 @@ class TaskManager {
         let tasksHtmlList = [];
         for(let i = 0; i < this.tasks.length; i++) {
             const currentTask = this.tasks[i];
-            // console.log(dueDate.value)
-            // let formattedDate;
-            // if (dueDate.value != '') {
-            //     let date = new Date(currentTask.dueDate);
-            //     formattedDate = (date.getMonth() + 1) + '/' + (date.getDate() + 1) + '/' + date.getFullYear(); 
-            //  } else {
-            //      formattedDate = 'No due date';
-            //  };
             const date = new Date(currentTask.dueDate);
-            const formattedDate = (date.getMonth() + 1) + '/' + (date.getDate() + 1) + '/' + date.getFullYear();
+            let formattedDate = (date.getMonth() + 1) + '/' + (date.getDate() + 1) + '/' + date.getFullYear();
+            if (formattedDate == 'NaN/NaN/NaN'){
+                formattedDate = "No due date";
+            };
             const taskHtml = createTaskHtml(currentTask.id, currentTask.name, currentTask.description, currentTask.assignedTo, formattedDate, currentTask.status, currentTask.email);
             tasksHtmlList.push(taskHtml);
         };
         const tasksHtml = tasksHtmlList.join("\n");
         const taskList = document.querySelector("#taskList");
         taskList.innerHTML = tasksHtml;
+        return true;
     }
 
-    // Create a function to save to local storage
     save() {
         let tasksJson = JSON.stringify(this.tasks);
         localStorage.setItem("tasks", tasksJson);
         let currentId = String(this.currentId);
-        console.log(currentId);
         localStorage.setItem("currentId", currentId);
     }
 
-    // Create a function to load local storage
     load() {
         if (localStorage.getItem("tasks")) {
             let tasksJson = localStorage.getItem("tasks");
@@ -105,14 +98,46 @@ class TaskManager {
         this.tasks = tasksToKeep;
     }
 
-    updateList
+    //This method changes color of status
+    updateStatus(id, value) {;
+        const changeList = [];
+        for (let i = 0; i < this.tasks.length; i++) {
+            let currentTask = this.tasks[i];
+            if (id == currentTask.id) {
+                currentTask.status = value;
+                changeList.push(currentTask);
+            }else {
+                changeList.push(currentTask);
+            }
+        };
+        this.tasks = changeList;
+    }
+
+    // Create a method to save to local storage
+    save() {
+        let tasksJson = JSON.stringify(this.tasks);
+        localStorage.setItem("tasks", tasksJson);
+        let currentId = String(this.currentId);
+        localStorage.setItem("currentId", currentId);
+    }
+
+    // Create a method to load local storage
+    load() {
+        if (localStorage.getItem("tasks")) {
+            let tasksJson = localStorage.getItem("tasks");
+            this.tasks = JSON.parse(tasksJson);
+        };
+        if (localStorage.getItem("currentId")) {
+            let currentIdString = localStorage.getItem("currentId");
+            this.currentId = Number(currentIdString);
+        }           
+    }
+
+    // The method delete a task
+    deleteTask(id) {
+        let tasksToKeep = this.tasks.filter(task => task.id != id);
+        this.tasks = tasksToKeep;
+    }
+
 };
 
-
-// to test the code of the class
-// const task1 = new TaskManager();
-// console.log(task1.tasks);
-// console.log(task1.currentId);
-// task1.addTask('Person1','clean','Person2','07/08/2021','Todo', 'person@gmail.com');
-// console.log(task1.tasks)
-// console.log(task1)

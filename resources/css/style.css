@@ -1,11 +1,7 @@
-/* .row {
-    display:inline-block;
-    box-sizing: border-box;
-} */
-
 .card {
     box-sizing: border-box;
     margin: 10px;
+    width: 325px;
 }
 
 ul {
@@ -15,7 +11,7 @@ ul {
 #descriptionCard {
     border: 1px solid #d0e1e1;
     margin: 10px auto;
-    width: 200px;
+    width: 280px;
     height: 100px;
     overflow-y: scroll;
 }
@@ -33,10 +29,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     width: auto;
 }
 
-/* .alert {
-    position:absolute;
+.todo {
+    background-color:  #FF9BBD;
 }
 
-#descriptionRow {
-    position:relative;
-} */
+.in-progress {
+    background-color: #FFFF69;
+}
+
+.done {
+    background-color:  #B2FF69;
+}
